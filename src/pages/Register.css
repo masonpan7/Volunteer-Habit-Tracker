@@ -1,0 +1,24 @@
+.form-container {
+  border-style: solid;
+  border-radius: 5%;
+  width: 120%;
+  height: auto;
+  background-color: #A9927D;
+  padding-bottom: 5%;
+} 
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-btn {
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #444242;
+}
