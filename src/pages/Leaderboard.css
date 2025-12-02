@@ -1,0 +1,290 @@
+.leaderboard-container {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 1.5rem;
+}
+
+.leaderboard-content {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.achievement-header {
+  background: linear-gradient(to right, #2563eb, #9333ea);
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.achievement-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.achievement-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .achievement-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.achievement-stat-card {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.achievement-stat-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.achievement-stat-value {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+.badges-section {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+.badges-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .badges-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.badge-card {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.badge-card.earned {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.badge-card.locked {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  opacity: 0.5;
+}
+
+.badge-card.novice {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.badge-card.contributor {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-card.professional {
+  background-color: #f3e8ff;
+  color: #6b21a8;
+}
+
+.badge-card.expert {
+  background-color: #fef3c7;
+  color: #854d0e;
+}
+
+.badge-card.healthcare {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-card.education {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+.badge-card.environment {
+  background-color: #ccfbf1;
+  color: #115e59;
+}
+
+.badge-icon {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.badge-status {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.leaderboard-section {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.leaderboard-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.filter-button.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.filter-button.inactive {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.filter-button:hover {
+  opacity: 0.9;
+}
+
+.leaderboard-list {
+  border-top: 1px solid #e5e7eb;
+}
+
+.leaderboard-list > div:not(:last-child) {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.leaderboard-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.leaderboard-item {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.leaderboard-item.current-user {
+  background-color: #eff6ff;
+}
+
+.leaderboard-item:hover:not(.current-user) {
+  background-color: #f9fafb;
+}
+
+.leaderboard-rank {
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 4rem;
+  text-align: center;
+}
+
+.leaderboard-user-info {
+  flex: 1;
+}
+
+.leaderboard-username {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.current-user-label {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: #2563eb;
+}
+
+.leaderboard-badges {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.leaderboard-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.leaderboard-points-section {
+  text-align: right;
+}
+
+.leaderboard-points {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.leaderboard-hours {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.points-explanation {
+  background-color: #eff6ff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.points-explanation-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.points-explanation-text {
+  font-size: 0.875rem;
+  color: #374151;
+}
