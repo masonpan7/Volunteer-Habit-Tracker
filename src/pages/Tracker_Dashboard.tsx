@@ -51,7 +51,7 @@ export default function Tracker_Dashboard() {
         } catch (error) {
             console.error('Error fetching events:', error);
             
-            // DEVELOPMENT MODE: If backend isn't ready, use fake data for testing
+            // Fake testing data
             setEvents([
                 { _id: '1', hours: 5, type: 'Healthcare', organization: 'Local Hospital', date: '2024-11-15', points: 10 },
                 { _id: '2', hours: 3, type: 'Education', organization: 'Library', date: '2024-11-20', points: 6 }

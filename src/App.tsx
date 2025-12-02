@@ -27,7 +27,6 @@ function HomePage() {
   return (
     <div style={{ padding: '40px', textAlign: 'center' }}>
       <h1>Volunteer Habit Tracker</h1>
-      <p>Click "Tracker Dashboard" in the nav to see your page!</p>
     </div>
   );
 }
