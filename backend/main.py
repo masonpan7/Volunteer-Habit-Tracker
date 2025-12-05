@@ -5,8 +5,10 @@ from routers import auth, events, users
 
 app = FastAPI(
     title="Volunteer Habit Tracker API",
-    description="API for tracking volunteer hours and earning badges",
-    version="1.0.0"
+    description="Track volunteer hours, earn points, and compete on the leaderboard",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
 )
 
 # CORS configuration for React frontend
