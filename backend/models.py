@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, EmailStr
 from typing import Optional, List
 from datetime import datetime
+from enum import Enum
 
 class UserBase(BaseModel):
     username: str
@@ -29,3 +30,40 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: Optional[str] = None
+
+class VolunteerType(str, Enum):
+    COMMUNITY_SERVICE = "Community Service"
+    TUTORING = "Tutoring"
+    ENVIRONMENTAL = "Environmental"
+    HEALTHCARE = "Healthcare"
+    ANIMAL_CARE = "Animal Care"
+    FUNDRAISING = "Fundraising"
+    OTHER = "Other"
+
+class VolunteerEventCreate(BaseModel):
+    organization: str
+    hours: float
+    type: VolunteerType
+    date: datetime
+    description: Optional[str] = None
+
+class VolunteerEventUpdate(BaseModel):
+    organization: Optional[str] = None
+    hours: Optional[float] = None
+    type: Optional[VolunteerType] = None
+    date: Optional[datetime] = None
+    description: Optional[str] = None
+
+class VolunteerEvent(BaseModel):
+    id: str = Field(alias="_id")
+    user_id: str
+    organization: str
+    hours: float
+    type: VolunteerType
+    date: datetime
+    points: int
+    description: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    class Config:
+        populate_by_name = True
