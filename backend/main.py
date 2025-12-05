@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import connect_to_mongo, close_mongo_connection
-from routers import auth, events
+from routers import auth, events, users
 
 app = FastAPI(
     title="Volunteer Habit Tracker API",
@@ -21,6 +21,7 @@ app.add_middleware(
 # Include routers
 app.include_router(auth.router)
 app.include_router(events.router)
+app.include_router(users.router)
 
 @app.on_event("startup")
 async def startup_db_client():
