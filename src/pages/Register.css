@@ -1,24 +1,31 @@
+
 .form-container {
+  text-align: center;
+  width: fit-content;
+  margin: 10% auto;
   border-style: solid;
   border-radius: 5%;
-  width: 120%;
+  width: 40%;
   height: auto;
   background-color: #A9927D;
   padding-bottom: 5%;
+  max-width: 25rem;
+  min-width: 15rem;
 } 
 
+
 .password-wrapper {
-    position: relative;
+  position: relative;
 }
 
 .password-btn {
-    position: absolute;
-    right: 1.2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    color: #444242;
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: #444242;
 }
