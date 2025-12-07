@@ -97,7 +97,7 @@ export default function Register() {
                 <button type="submit">Create Account</button>
             </form>
     
-            {msg && <p style={{ marginTop: "1rem" }}>{msg}</p>}
+            {msg && <p style={{ marginTop: "1rem", fontSize:"1.1rem", fontWeight:"bold"}}>{msg}</p>}
         </div>
     );
 }

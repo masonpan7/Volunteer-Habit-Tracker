@@ -1,7 +1,7 @@
 :root {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   background-color: #F1FFE7;
-  padding: 0px 0px 0px 0px;
+  padding: 0;
   margin: 0;
 }
 
@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
 }
 
-
+/* submit button styling */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -25,6 +25,7 @@ button {
   transition: border-color 0.25s;
 }
 
+/* input boxes styling */
 input {
   border-radius: .5rem;
   border: 1px solid transparent;
@@ -61,6 +62,7 @@ input {
 }
 
 .nav-bar a:hover {
-  color: #646cff
+  color: #8783D1;
+  font-size: 1.3rem;
 }
 
