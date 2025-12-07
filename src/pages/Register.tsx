@@ -3,6 +3,7 @@ import './Register.css'
 // import { resolvePath, unstable_setDevServerHooks } from 'react-router-dom';
 
 export default function Register() {
+    const [email, setEmail] = useState("");
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
@@ -24,7 +25,7 @@ export default function Register() {
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ user, pass }),
+                body: JSON.stringify({ email, user, pass }),
             });
         
             const data = await res.json();
@@ -46,6 +47,15 @@ export default function Register() {
             <h1>Register</h1>
     
             <form onSubmit={handleSubmit} style={{ marginTop: "1rem" }}>
+                <input 
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{ margin: "0.5rem", padding: "0.5rem" }}
+                    required
+                /><br/>
+
                 <input 
                     type="text"
                     placeholder="Username"
