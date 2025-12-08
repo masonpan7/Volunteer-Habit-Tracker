@@ -36,15 +36,20 @@ export default function LeaderboardPage() {
         { name: 'Contributor', threshold: 25, icon: '⭐', color: 'contributor' },
         { name: 'Professional', threshold: 50, icon: '💎', color: 'professional' },
         { name: 'Expert', threshold: 100, icon: '👑', color: 'expert' },
-        { name: 'Healthcare Hero', threshold: 20, icon: '🏥', color: 'healthcare', type: 'Healthcare' },
-        { name: 'Education Champion', threshold: 20, icon: '📚', color: 'education', type: 'Education' },
-        { name: 'Environment Guardian', threshold: 20, icon: '🌍', color: 'environment', type: 'Environment' }
+        { name: 'Point Master', threshold: 500, icon: '🎯', color: 'points' },
+        { name: 'Point Legend', threshold: 1000, icon: '🏆', color: 'legend' },
+        { name: 'Community Hero', threshold: 500, icon: '🦸', color: 'hero' }
     ];
 
 
     const fetchLeaderboard = async () => {
     try {
-        const response = await fetch(`http://localhost:8000/api/users/leaderboard`);
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://localhost:8000/api/users/leaderboard`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         const leaderboard = await response.json();
         
         // Add rank to each user
@@ -236,9 +241,8 @@ return (
         <div className="points-explanation">
           <h3 className="points-explanation-title">How Points Work</h3>
           <p className="points-explanation-text">
-            Earn 2 points for every hour volunteered. Collect badges by reaching
-            milestones and completing different types of volunteer work. Compete with
-            others to climb the leaderboard!
+            Earn 10 points for every hour volunteered, with bonuses for healthcare 
+            (1.5x) and tutoring (1.3x). Collect badges by reaching milestones.
           </p>
         </div>
       </div>

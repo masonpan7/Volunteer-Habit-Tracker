@@ -51,7 +51,7 @@ async def create_event(
         }
     )
     
-    return VolunteerEvent(**event_dict)
+    return VolunteerEvent(**event_dict).model_dump(by_alias=True)
 
 @router.get("", response_model=List[VolunteerEvent])
 async def get_events(

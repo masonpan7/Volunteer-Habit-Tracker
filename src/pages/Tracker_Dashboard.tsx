@@ -31,13 +31,13 @@ export default function Tracker_Dashboard() {
     });
 
     const volunteerTypes = [
-        'Healthcare',
-        'Education',
-        'Environment',
-        'Community Service',
-        'Animal Welfare',
-        'Youth Development',
-        'Other'
+      'Community Service',
+      'Tutoring',
+      'Environmental',
+      'Healthcare',
+      'Animal Care',
+      'Fundraising',
+      'Other'
     ];
 
     const fetchEvents = async () => {
@@ -222,7 +222,7 @@ return (
                         <p>Date: {new Date(event.date).toLocaleDateString()}</p>
                         {/* Calculate points: if not provided, use hours * 2 */}
                         <p className="event-points">
-                          Points: {event.points || event.hours * 2}
+                          Points: {event.points}
                         </p>
                       </div>
                     </div>
