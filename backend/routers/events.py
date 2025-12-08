@@ -1,6 +1,6 @@
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, HTTPException, status, Depends # type: ignore
 from typing import List
-from bson import ObjectId
+from bson import ObjectId # type: ignore
 from models import VolunteerEvent, VolunteerEventCreate, VolunteerEventUpdate
 from database import get_database
 from dependencies import get_current_user
@@ -51,7 +51,7 @@ async def create_event(
         }
     )
     
-    return VolunteerEvent(**event_dict)
+    return VolunteerEvent(**event_dict).model_dump(by_alias=True)
 
 @router.get("", response_model=List[VolunteerEvent])
 async def get_events(
@@ -186,3 +186,28 @@ async def delete_event(
     )
     
     return None
+
+
+@router.get("/summary")
+async def get_events_summary(
+    current_user: dict = Depends(get_current_user),
+    db=Depends(get_database)
+):
+    """Get all events with totals - matches frontend expectations"""
+    events_collection = db["events"]
+    
+    events = []
+    total_hours = 0
+    total_points = 0
+    
+    async for event in events_collection.find({"user_id": current_user["_id"]}):
+        event["_id"] = str(event["_id"])
+        events.append(VolunteerEvent(**event).model_dump())
+        total_hours += event["hours"]
+        total_points += event["points"]
+    
+    return {
+        "events": events,
+        "totalHours": total_hours,
+        "totalPoints": total_points
+    }

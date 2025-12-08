@@ -22,14 +22,14 @@ def determine_badges(total_hours: float, total_points: int) -> list[str]:
     badges = []
     
     # Hour-based badges
-    if total_hours >= 10:
-        badges.append("Novice Volunteer")
-    if total_hours >= 50:
-        badges.append("Dedicated Volunteer")
     if total_hours >= 100:
-        badges.append("Professional Volunteer")
-    if total_hours >= 250:
-        badges.append("Elite Volunteer")
+        badges.append("Expert")
+    elif total_hours >= 50:
+        badges.append("Professional")
+    elif total_hours >= 25:
+        badges.append("Contributor")
+    elif total_hours >= 10:
+        badges.append("Novice")
     
     # Point-based badges
     if total_points >= 500:
