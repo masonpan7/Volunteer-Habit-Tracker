@@ -80,6 +80,7 @@ export default function LeaderboardPage() {
         await fetchLeaderboard();
         await fetchUserData();
         })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timeFilter]);
 
     const getRankDisplay = (rank: number): string => {
