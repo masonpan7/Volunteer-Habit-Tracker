@@ -43,35 +43,48 @@ export default function LeaderboardPage() {
 
 
     const fetchLeaderboard = async () => {
-        try {
-        const response = await fetch(`/api/leaderboard?filter=${timeFilter}`);
-        const data = await response.json();
-        setLeaderboard(data.leaderboard || []);
-        } catch (error) {
+    try {
+        const response = await fetch(`http://localhost:8000/api/users/leaderboard`);
+        const leaderboard = await response.json();
+        
+        // Add rank to each user
+        const rankedLeaderboard = leaderboard.map((user: { badges: unknown; }, index: number) => ({
+            ...user,
+            rank: index + 1,
+            badges: user.badges || []
+        }));
+        
+        setLeaderboard(rankedLeaderboard);
+    } catch (error) { {
         console.error('Error fetching leaderboard:', error);
         
-        // Fake data for testing
-        setLeaderboard([
-            { rank: 1, username: 'Sarah_Chen', totalPoints: 245, totalHours: 122, badges: ['Expert', 'Healthcare Hero'] },
-            { rank: 2, username: 'Mike_Johnson', totalPoints: 198, totalHours: 99, badges: ['Professional', 'Education Champion'] },
-            { rank: 3, username: 'Emma_Davis', totalPoints: 176, totalHours: 88, badges: ['Professional'] },
-            { rank: 4, username: 'Alex_Kim', totalPoints: 142, totalHours: 71, badges: ['Professional'] },
-            { rank: 5, username: 'You', totalPoints: 128, totalHours: 64, badges: ['Contributor'], isCurrentUser: true }
-        ]);
         }
-    };
+    };}
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('/api/user/profile');
-      const data = await response.json();
-      setCurrentUser(data);
-      setUserBadges(data.badges || []);
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:8000/api/users/me', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const user = await response.json();
+        
+        // Get user's rank from leaderboard
+        const leaderboardResponse = await fetch('http://localhost:8000/api/users/leaderboard');
+        const leaderboard = await leaderboardResponse.json();
+        const rank = leaderboard.findIndex((u: { username: string; }) => u.username === user.username) + 1;
+        
+        setCurrentUser({
+            username: user.username,
+            totalPoints: user.total_points,
+            totalHours: user.total_hours,
+            rank: rank || 999
+        });
+        setUserBadges(user.badges || []);
     } catch (error) {
       console.error('Error fetching user data:', error);
-        // Fake data for testing
-        setCurrentUser({ username: 'You', totalPoints: 128, totalHours: 64, rank: 5 });
-        setUserBadges(['Contributor']);
     }
   };
 
@@ -80,7 +93,6 @@ export default function LeaderboardPage() {
         await fetchLeaderboard();
         await fetchUserData();
         })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timeFilter]);
 
     const getRankDisplay = (rank: number): string => {

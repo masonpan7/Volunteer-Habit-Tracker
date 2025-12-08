@@ -1,6 +1,6 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends # type: ignore
 from typing import List
-from bson import ObjectId
+from bson import ObjectId # type: ignore
 from models import User
 from database import get_database
 from dependencies import get_current_user
@@ -40,18 +40,26 @@ async def get_user_stats(
     }
 
 @router.get("/leaderboard")
-async def get_leaderboard(db=Depends(get_database), limit: int = 10):
+async def get_leaderboard(
+    db=Depends(get_database), 
+    limit: int = 10,
+    current_user: dict = Depends(get_current_user)
+):
     """Get leaderboard of top volunteers by points"""
     users_collection = db["users"]
     
     leaderboard = []
+    rank = 1
     async for user in users_collection.find().sort("total_points", -1).limit(limit):
         leaderboard.append({
+            "rank": rank,
             "username": user["username"],
-            "total_hours": user["total_hours"],
-            "total_points": user["total_points"],
-            "badges": user["badges"]
+            "totalHours": user["total_hours"],  # Match frontend camelCase
+            "totalPoints": user["total_points"],  # Match frontend camelCase
+            "badges": user["badges"],
+            "isCurrentUser": str(user["_id"]) == current_user["_id"]
         })
+        rank += 1
     
     return leaderboard
 

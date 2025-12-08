@@ -42,22 +42,21 @@ export default function Tracker_Dashboard() {
 
     const fetchEvents = async () => {
         try {
-            const response = await fetch('/api/volunteering/events');
-            const data = await response.json();
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:8000/api/events', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+            });
+            const events = await response.json();
+            const totalHours = events.reduce((sum: number, e: { hours: number; }) => sum + e.hours, 0);
+            const totalPoints = events.reduce((sum: number, e: { points: number; }) => sum + e.points, 0);
             
-            setEvents(data.events || []);
-            setTotalHours(data.totalHours || 0);
-            setTotalPoints(data.totalPoints || 0);
+            setEvents(events);
+            setTotalHours(totalHours);
+            setTotalPoints(totalPoints);
         } catch (error) {
             console.error('Error fetching events:', error);
-            
-            // Fake testing data
-            setEvents([
-                { _id: '1', hours: 5, type: 'Healthcare', organization: 'Local Hospital', date: '2024-11-15', points: 10 },
-                { _id: '2', hours: 3, type: 'Education', organization: 'Library', date: '2024-11-20', points: 6 }
-            ]);
-            setTotalHours(8);
-            setTotalPoints(16);
         }
     };
 
@@ -79,19 +78,25 @@ export default function Tracker_Dashboard() {
     const handleSubmit = async () => {
         try {
             const url = editEvent 
-                ? `/api/volunteering/events/${editEvent._id}`
-                : '/api/volunteering/events';
+            ? `http://localhost:8000/api/events/${editEvent._id}`
+            : 'http://localhost:8000/api/events';
             
             const method = editEvent ? 'PUT' : 'POST';
             
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please login first');
+                return;
+            }
+
             const response = await fetch(url, {
                 method,
                 headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(formData)
-        });
+            })
 
             if (response.ok) {
                 fetchEvents();
@@ -107,11 +112,12 @@ export default function Tracker_Dashboard() {
         if (!confirm('Are you sure you want to delete this event?')) return;
 
         try {
-        const response = await fetch(`/api/volunteering/events/${eventId}`, {
-            method: 'DELETE',
-            headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://localhost:8000/api/events/${eventId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
         });
 
         if (response.ok) {
