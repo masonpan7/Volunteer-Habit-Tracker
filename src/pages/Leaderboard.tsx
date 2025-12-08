@@ -32,46 +32,59 @@ export default function LeaderboardPage() {
     const [timeFilter, setTimeFilter] = useState<'all' | 'month' | 'week'>('all');
 
     const badgeDefinitions: Badge[] = [
-        { name: 'Novice', threshold: 10, icon: '🌱', color: 'novice' },
-        { name: 'Contributor', threshold: 25, icon: '⭐', color: 'contributor' },
-        { name: 'Professional', threshold: 50, icon: '💎', color: 'professional' },
-        { name: 'Expert', threshold: 100, icon: '👑', color: 'expert' },
-        { name: 'Healthcare Hero', threshold: 20, icon: '🏥', color: 'healthcare', type: 'Healthcare' },
-        { name: 'Education Champion', threshold: 20, icon: '📚', color: 'education', type: 'Education' },
-        { name: 'Environment Guardian', threshold: 20, icon: '🌍', color: 'environment', type: 'Environment' }
+        { name: 'Novice Volunteer', threshold: 10, icon: '🌱', color: 'novice' },
+        { name: 'Dedicated Volunteer', threshold: 50, icon: '⭐', color: 'contributor' },
+        { name: 'Professional Volunteer', threshold: 100, icon: '💎', color: 'professional' },
+        { name: 'Elite Volunteer', threshold: 250, icon: '👑', color: 'expert' },
+        { name: 'Point Master', threshold: 500, icon: '🏆', color: 'points' },
+        { name: 'Point Legend', threshold: 1000, icon: '💫', color: 'legend' },
+        { name: 'Community Hero', threshold: 500, icon: '🦸', color: 'hero' }
     ];
 
 
     const fetchLeaderboard = async () => {
         try {
-        const response = await fetch(`/api/leaderboard?filter=${timeFilter}`);
-        const data = await response.json();
-        setLeaderboard(data.leaderboard || []);
+            const response = await fetch('http://localhost:8000/api/users/leaderboard');
+            const data = await response.json();
+            
+            const currentUsername = localStorage.getItem('user');
+            const formattedData = data.map((user: any, index: number) => ({
+                rank: index + 1,
+                username: user.username,
+                totalPoints: user.total_points,
+                totalHours: user.total_hours,
+                badges: user.badges || [],
+                isCurrentUser: user.username === currentUsername
+            }));
+            
+            setLeaderboard(formattedData);
         } catch (error) {
-        console.error('Error fetching leaderboard:', error);
-        
-        // Fake data for testing
-        setLeaderboard([
-            { rank: 1, username: 'Sarah_Chen', totalPoints: 245, totalHours: 122, badges: ['Expert', 'Healthcare Hero'] },
-            { rank: 2, username: 'Mike_Johnson', totalPoints: 198, totalHours: 99, badges: ['Professional', 'Education Champion'] },
-            { rank: 3, username: 'Emma_Davis', totalPoints: 176, totalHours: 88, badges: ['Professional'] },
-            { rank: 4, username: 'Alex_Kim', totalPoints: 142, totalHours: 71, badges: ['Professional'] },
-            { rank: 5, username: 'You', totalPoints: 128, totalHours: 64, badges: ['Contributor'], isCurrentUser: true }
-        ]);
+            console.error('Error fetching leaderboard:', error);
         }
     };
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('/api/user/profile');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:8000/api/users/me', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await response.json();
-      setCurrentUser(data);
+      
+      // Find user's rank in leaderboard
+      const userRank = leaderboard.findIndex(u => u.username === data.username) + 1;
+      
+      setCurrentUser({
+        username: data.username,
+        totalPoints: data.total_points,
+        totalHours: data.total_hours,
+        rank: userRank || 0
+      });
       setUserBadges(data.badges || []);
     } catch (error) {
       console.error('Error fetching user data:', error);
-        // Fake data for testing
-        setCurrentUser({ username: 'You', totalPoints: 128, totalHours: 64, rank: 5 });
-        setUserBadges(['Contributor']);
     }
   };
 

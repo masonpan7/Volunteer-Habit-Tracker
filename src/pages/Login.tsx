@@ -12,20 +12,28 @@ export default function Login() {
     e.preventDefault();
 
     try {
-        const res = await fetch("http://localhost:8000/login", {
+        const res = await fetch("http://localhost:8000/api/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ user, pass }),
+            body: JSON.stringify({ 
+                username: user, 
+                password: pass 
+            }),
         });
     
         const data = await res.json();
         if (res.ok) {
-            // store username into localStorage
+            // Store token and username
+            localStorage.setItem("token", data.access_token);
             localStorage.setItem("user", user);
 
             setMsg(`Logged in as ${user}`);
+            // Redirect to dashboard after 1 second
+            setTimeout(() => {
+                window.location.href = '/tracker';
+            }, 1000);
         } else {
             setMsg(`Error: ${data.detail}`);
         }
