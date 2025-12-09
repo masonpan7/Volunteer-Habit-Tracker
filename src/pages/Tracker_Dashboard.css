@@ -6,6 +6,7 @@
 .tracker-container {
   min-height: 100vh;
   padding: 2rem;
+  padding-top: 6rem;
 }
 
 .tracker-content {
@@ -241,6 +242,7 @@
   justify-content: center;
   padding: 1rem;
   animation: fadeIn 0.3s ease;
+  z-index: 1000;
 }
 
 @keyframes fadeIn {
@@ -301,13 +303,13 @@
 .form-input,
 .form-select {
   width: 100%;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #9ca3af !important;
   border-radius: 12px;
   padding: 0.875rem 1.25rem;
   font-size: 1rem;
   transition: all 0.3s ease;
   box-sizing: border-box;
-  background: white;
+  background: white !important;
 }
 
 .form-input:focus,
