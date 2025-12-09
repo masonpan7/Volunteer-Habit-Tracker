@@ -53,8 +53,8 @@ export default function LeaderboardPage() {
             const data = await response.json();
             
             const currentUsername = localStorage.getItem('user');
-            const formattedData = data.map((user: any, index: number) => ({
-                rank: index + 1,
+            const formattedData = data.map((user: any) => ({
+                rank: user.rank,
                 username: user.username,
                 totalPoints: user.total_points,
                 totalHours: user.total_hours,
