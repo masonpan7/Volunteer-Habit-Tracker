@@ -44,7 +44,12 @@ export default function LeaderboardPage() {
 
     const fetchLeaderboard = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/users/leaderboard');
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:8000/api/users/leaderboard', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             const data = await response.json();
             
             const currentUsername = localStorage.getItem('user');
