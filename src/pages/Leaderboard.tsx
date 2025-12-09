@@ -46,18 +46,19 @@ export default function LeaderboardPage() {
         try {
             const token = localStorage.getItem('token');
             const response = await fetch('http://localhost:8000/api/users/leaderboard', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+                  headers: {
+                      'Authorization': `Bearer ${token}`
+                  }
+              });
             const data = await response.json();
             
             const currentUsername = localStorage.getItem('user');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const formattedData = data.map((user: any) => ({
                 rank: user.rank,
                 username: user.username,
-                totalPoints: user.total_points,
-                totalHours: user.total_hours,
+                totalPoints: user.totalPoints,
+                totalHours: user.totalHours,
                 badges: user.badges || [],
                 isCurrentUser: user.username === currentUsername
             }));
@@ -70,26 +71,33 @@ export default function LeaderboardPage() {
 
   const fetchUserData = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/users/me', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const data = await response.json();
-      
-      // Find user's rank in leaderboard
-      const userRank = leaderboard.findIndex(u => u.username === data.username) + 1;
-      
-      setCurrentUser({
-        username: data.username,
-        totalPoints: data.total_points,
-        totalHours: data.total_hours,
-        rank: userRank || 0
-      });
-      setUserBadges(data.badges || []);
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:8000/api/users/me', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+        
+        // Fetch leaderboard to get rank
+        const leaderboardResponse = await fetch('http://localhost:8000/api/users/leaderboard', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const leaderboardData = await leaderboardResponse.json();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const userRank = leaderboardData.findIndex((u: any) => u.username === data.username) + 1;
+        
+        setCurrentUser({
+            username: data.username,
+            totalPoints: data.total_points,
+            totalHours: data.total_hours,
+            rank: userRank || 999
+        });
+        setUserBadges(data.badges || []);
     } catch (error) {
-      console.error('Error fetching user data:', error);
+        console.error('Error fetching user data:', error);
     }
   };
 
@@ -242,9 +250,8 @@ return (
         <div className="points-explanation">
           <h3 className="points-explanation-title">How Points Work</h3>
           <p className="points-explanation-text">
-            Earn 2 points for every hour volunteered. Collect badges by reaching
-            milestones and completing different types of volunteer work. Compete with
-            others to climb the leaderboard!
+            Earn 10 points for every hour volunteered, with bonuses for healthcare 
+            (1.5x) and tutoring (1.3x). Collect badges by reaching milestones.
           </p>
         </div>
       </div>

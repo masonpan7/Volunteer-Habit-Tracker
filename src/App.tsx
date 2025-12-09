@@ -76,18 +76,18 @@ function App() {
           fontSize: '2rem',
           fontWeight: '700',
           color: 'white',
-          marginBottom: '1.5rem',
+          marginBottom: '1rem',
           textAlign: 'center'
         }}>
           Get Started
         </h2>
         <p style={{
-          fontSize: '1rem',
+          fontSize: '1.25rem',
           color: 'rgba(255, 255, 255, 0.8)',
           marginBottom: '2.5rem',
           textAlign: 'center'
         }}>
-          Join our community of volunteers making a difference
+          Join our community of volunteers <br />making a difference
         </p>
         
         <div style={{ 

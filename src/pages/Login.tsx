@@ -29,7 +29,7 @@ export default function Login() {
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user", user);
 
-            setMsg(`Logged in as ${user}`);
+            setMsg(`Logged in as ${user}. Redirecting to tracker...`);
             // Redirect to dashboard after 1 second
             setTimeout(() => {
                 window.location.href = '/tracker';
@@ -46,25 +46,23 @@ export default function Login() {
   return (
     <div className="form-container">
       <h1>Login</h1>
-      <form onSubmit={handleLogin} style={{ marginTop: "1rem" }}>
+      <form onSubmit={handleLogin}>
         <input
           type="text"
           placeholder="Username"
           value={user}
           onChange={(e) => setUser(e.target.value)}
-          style={{ margin: "0.5rem", padding: "0.5rem" }}
+          style={{ margin: "0.5rem", padding: "0.75rem" }}
           required
         />
-        <br />
         <input
           type="password"
           placeholder="Password"
           value={pass}
           onChange={(e) => setPass(e.target.value)}
-          style={{ margin: "0.5rem", padding: "0.5rem" }}
+          style={{ margin: "0.5rem", padding: "0.75rem" }}
           required
         />
-        <br />
         <button type="submit">Login</button>
       </form>
 

@@ -36,7 +36,15 @@ export default function Register() {
             if (res.ok) {
                 setUser("");
                 setPass("");
-                setMsg("Registration successful");
+                setEmail("");
+                setConfirmPass("");
+                setMsg("Registration successful. Redirecting to login...");
+
+                // Redirect to dashboard after 1 second
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 1000);
+
             } else {
                 setMsg(`Error: ${data.detail}`);
             }
@@ -50,24 +58,24 @@ export default function Register() {
         <div className='form-container'>
             <h1>Register</h1>
     
-            <form onSubmit={handleSubmit} style={{ marginTop: "1rem" }}>
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    style={{ margin: "0.5rem", padding: "0.5rem" }}
+                    style={{ margin: "0.5rem", padding: "0.75rem" }}
                     required
-                /><br/>
+                />
 
                 <input 
                     type="text"
                     placeholder="Username"
                     value={user}
                     onChange={(e) => setUser(e.target.value)}
-                    style={{ margin: "0.5rem", padding: "0.5rem" }}
+                    style={{ margin: "0.5rem", padding: "0.75rem" }}
                     required
-                /><br/>
+                />
 
                 {/* Input password text box 
                     User can hide/show the password they entered */}
@@ -77,9 +85,9 @@ export default function Register() {
                         placeholder="Password"
                         value={pass}
                         onChange={(e) => setPass(e.target.value)}
-                        style={{ margin: "0.5rem", padding: "0.5rem" }}
+                        style={{ margin: "0.5rem", padding: "0.75rem" }}
                         required
-                    /><br/>
+                    />
                     <button 
                         type="button"
                         className="password-btn"
@@ -94,9 +102,9 @@ export default function Register() {
                     placeholder="Repeat Password"
                     value={confirmPass}
                     onChange={(e) => setConfirmPass(e.target.value)}
-                    style={{ margin: "0.5rem", padding: "0.5rem" }}
+                    style={{ margin: "0.5rem", padding: "0.75rem" }}
                     required
-                /><br/>
+                />
     
                 <button type="submit">Create Account</button>
             </form>

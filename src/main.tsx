@@ -83,7 +83,7 @@ function Navigation() {
       {!isLoggedIn ? (
         <>
           <Link 
-            to="/register" 
+            to="/leaderboard" 
             style={navLinkStyle}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'
@@ -94,10 +94,10 @@ function Navigation() {
               e.currentTarget.style.transform = 'translateY(0)'
             }}
           >
-            Register
+            Leaderboard
           </Link>
           <Link 
-            to="/login" 
+            to="/tracker" 
             style={navLinkStyle}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'
@@ -108,8 +108,39 @@ function Navigation() {
               e.currentTarget.style.transform = 'translateY(0)'
             }}
           >
-            Login
+            Tracker
           </Link>
+          
+          <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem' }}>
+                        <Link 
+              to="/login" 
+              style={navLinkStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
+            >
+              Login
+            </Link>
+            <Link 
+              to="/register" 
+              style={navLinkStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
+            >
+              Register
+            </Link>
+          </div>
         </>
       ) : (
         <>

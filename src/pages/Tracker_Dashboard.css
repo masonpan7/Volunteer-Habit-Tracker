@@ -233,6 +233,7 @@
 }
 
 .modal-overlay {
+  margin-top:7rem; 
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
@@ -276,15 +277,9 @@
 .modal-title {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: -3.5rem;
   color: #1f2937;
   text-align: center;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
 }
 
 .form-group {
@@ -296,7 +291,7 @@
   display: block;
   font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   color: #374151;
 }
 

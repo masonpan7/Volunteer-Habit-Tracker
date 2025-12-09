@@ -21,15 +21,15 @@ def determine_badges(total_hours: float, total_points: int) -> list[str]:
     """Determine which badges a user has earned"""
     badges = []
     
-    # Hour-based badges
+    # Hour-based badges - Award ALL badges earned, not just highest
+    if total_hours >= 250:
+        badges.append("Elite Volunteer")
     if total_hours >= 100:
-        badges.append("Expert")
-    elif total_hours >= 50:
-        badges.append("Professional")
-    elif total_hours >= 25:
-        badges.append("Contributor")
-    elif total_hours >= 10:
-        badges.append("Novice")
+        badges.append("Professional Volunteer")
+    if total_hours >= 50:
+        badges.append("Dedicated Volunteer")
+    if total_hours >= 10:
+        badges.append("Novice Volunteer")
     
     # Point-based badges
     if total_points >= 500:
