@@ -77,7 +77,7 @@ function Navigation() {
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
           }} 
         />
-        Volunteer Habit Tracker
+        Helping Hands
       </Link>
       
       {!isLoggedIn ? (

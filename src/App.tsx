@@ -46,7 +46,7 @@ function App() {
           lineHeight: '1.2',
           margin: 0
         }}>
-          Volunteer Habit Tracker
+          Helping Hands
         </h1>
         <p style={{ 
           fontSize: '1.2rem', 
