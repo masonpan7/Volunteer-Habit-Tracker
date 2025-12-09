@@ -1,5 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from config import settings
+import certifi
 
 class Database:
     client: AsyncIOMotorClient = None
@@ -11,7 +12,10 @@ async def get_database():
 
 async def connect_to_mongo():
     """MongoDB startup"""
-    db.client = AsyncIOMotorClient(settings.mongodb_url)
+    db.client = AsyncIOMotorClient(
+        settings.mongodb_url,
+        tlsCAFile=certifi.where()
+    )
 
 async def close_mongo_connection():
     """MongoDB shutdown"""

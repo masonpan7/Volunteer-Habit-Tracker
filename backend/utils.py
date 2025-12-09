@@ -5,9 +5,9 @@ def calculate_points(hours: float, volunteer_type: VolunteerType) -> int:
     base_points = hours * 10
     
     multipliers = {
-        VolunteerType.HEALTHCARE: 1.5,
-        VolunteerType.TUTORING: 1.3,
-        VolunteerType.ENVIRONMENTAL: 1.2,
+        VolunteerType.HEALTHCARE: 1.0,
+        VolunteerType.TUTORING: 1.0,
+        VolunteerType.ENVIRONMENTAL: 1.0,
         VolunteerType.COMMUNITY_SERVICE: 1.0,
         VolunteerType.ANIMAL_CARE: 1.0,
         VolunteerType.FUNDRAISING: 1.0,

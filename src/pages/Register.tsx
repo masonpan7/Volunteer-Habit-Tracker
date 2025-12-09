@@ -13,6 +13,7 @@ export default function Register() {
     // Connect to backend to handle register submission
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        console.log("Form submitted!", { email, user, pass, confirmPass });
 
         if (pass !== confirmPass) {
             setMsg("Passwords do not match");

@@ -110,9 +110,6 @@ export default function LeaderboardPage() {
     }, [timeFilter]);
 
     const getRankDisplay = (rank: number): string => {
-        if (rank === 1) return '🥇';
-        if (rank === 2) return '🥈';
-        if (rank === 3) return '🥉';
         return `#${rank}`;
     };
 
@@ -244,15 +241,6 @@ return (
               ))
             )}
           </div>
-        </div>
-
-        {/* ===== POINTS EXPLANATION ===== */}
-        <div className="points-explanation">
-          <h3 className="points-explanation-title">How Points Work</h3>
-          <p className="points-explanation-text">
-            Earn 10 points for every hour volunteered, with bonuses for healthcare 
-            (1.5x) and tutoring (1.3x). Collect badges by reaching milestones.
-          </p>
         </div>
       </div>
     </div>
